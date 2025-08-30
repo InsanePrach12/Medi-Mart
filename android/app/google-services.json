@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1056760481900",
+    "project_id": "medi-mart-16142",
+    "storage_bucket": "medi-mart-16142.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1056760481900:android:fb1f74400aa3d1a6b07049",
+        "android_client_info": {
+          "package_name": "com.example.medi_mart"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfgIfgixYGZeAML1hQ1bonycKoEzTO-Fk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
