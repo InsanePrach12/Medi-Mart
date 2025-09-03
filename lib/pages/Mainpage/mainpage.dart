@@ -8,7 +8,7 @@ import 'package:medi_mart/pages/Drawer/mydrawer.dart';
 
 class mainpage extends StatefulWidget{
 
-  mainpage({super.key});
+  const mainpage({super.key});
 
   @override
   State<mainpage> createState() => _mainpageState();

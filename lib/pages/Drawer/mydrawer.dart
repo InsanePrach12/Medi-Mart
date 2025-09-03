@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medi_mart/pages/Utilities/my_list_tile.dart';
-import 'package:medi_mart/pages/cart/cart_display.dart';
 
 class Mydrawer extends StatelessWidget{
   const Mydrawer({super.key});

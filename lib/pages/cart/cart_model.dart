@@ -1,4 +1,3 @@
-// lib/services/cart_service.dart
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -6,9 +5,7 @@ class CartService {
   final String userId;
   final CollectionReference cartCollection;
 
-  CartService(this.userId) : cartCollection = FirebaseFirestore.instance.collection('carts');
-
-  /// Factory constructor to auto-use the logged-in user
+  CartService(this.userId) : cartCollection = FirebaseFirestore.instance.collection('Carts');
   factory CartService.fromAuth() {
     final user = FirebaseAuth.instance.currentUser;
     if (user == null) throw Exception('Must be logged in to access cart');
@@ -31,12 +28,11 @@ class CartService {
     final cartItem = await cartItemRef.get();
 
     if (cartItem.exists) {
-      // Update quantity if item exists
+ 
       await cartItemRef.update({
         'Quantity': (cartItem.data()?['Quantity'] ?? 0) + 1,
       });
     } else {
-      // Add new item with quantity 1
       await cartItemRef.set({
         ...product,
         'Quantity': 1,
@@ -63,4 +59,12 @@ class CartService {
       await cartItemRef.update({'Quantity': newQuantity});
     }
   }
+  Future<void> clearCart(String itemId) async {
+   await cartCollection
+        .doc(userId) 
+        .collection('items') 
+        .doc(itemId).delete(); 
+  
+  }
 }
+

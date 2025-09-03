@@ -114,7 +114,7 @@ class CartPage extends StatelessWidget {
                     style: const TextStyle(color: Colors.green),
                   ),
                   trailing: SizedBox(
-                    width: 120,
+                    width: 130,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
@@ -132,6 +132,7 @@ class CartPage extends StatelessWidget {
                           color: Colors.green,
                           onPressed: () => cartService.updateQuantity(itemId, 1),
                         ),
+                        IconButton(onPressed: ()=> cartService.clearCart(itemId), icon: const Icon(Icons.delete, color: Colors.grey)),
                       ],
                     ),
                   ),
@@ -188,7 +189,6 @@ class CartPage extends StatelessWidget {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    // TODO: Implement checkout functionality
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text("Checkout coming soon!")),
                     );

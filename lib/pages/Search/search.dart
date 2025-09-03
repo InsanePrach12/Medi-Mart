@@ -11,12 +11,14 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  String query = ""; // what user types
+  String query = ""; 
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: IconButton(
           iconSize: 20,
           icon: const Icon(Icons.arrow_back, color: Colors.black),
@@ -24,8 +26,7 @@ class _SearchPageState extends State<SearchPage> {
             Navigator.pop(context);
           },
         ),
-        title:       
-            SizedBox(
+        title: SizedBox(
               height: 50,
               child: CupertinoSearchTextField(
                 placeholder: "Search products...",
@@ -71,50 +72,66 @@ class _SearchPageState extends State<SearchPage> {
                     itemCount: results.length,
                     itemBuilder: (context, index) {
                       final product = results[index];
-                      return ListTile(
-                        leading: (product['Imageurl'] != null)
-                            ? Image.network(
-                                product['Imageurl'].trim(),
-                                height: 50,
-                                width: 50,
-                                fit: BoxFit.cover,
-                                errorBuilder: (context, error, stackTrace) {
-                                  print('Error loading image: $error');
-                                  return const Icon(Icons.broken_image, size: 50);
-                                },
-                              )
-                            : const Icon(Icons.image, size: 50),
-                        title: Text(product["Name"],
-                        style: const TextStyle(fontWeight: FontWeight.bold),),
-                        subtitle: Text("Price: ${product["Price"]}"),
-                        trailing:ElevatedButton(
-                                    
-                                    onPressed: () async {
-                                      final cart=CartService.fromAuth();
-                                      await cart.addToCart({
-                                        "ProductId": product.id,
-                                        "Name": product['Name'],
-                                        "Price": product['Price'],
-                                        "Imageurl": product['Imageurl'],
-                                      });
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text('${product['Name']} added to cart'),
-                                        ),
-                                      );
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Card(
+                        elevation: 2,
+                        margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
+                        color: Colors.white,
+                        child: ListTile(
+                          leading: Container(
+                            width: 50,
+                            height: 50,
+                            child: (product['Imageurl'] != null)
+                                ? Image.network(
+                                    product['Imageurl'].trim(),
+                                    height: 50,
+                                    width: 50,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      print('Error loading image: $error');
+                                      return const Icon(Icons.broken_image, size: 50);
                                     },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.blue,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
-                                      ),
-                                    ),
-                                    child: const Text("Add to Cart",
-                                    style: TextStyle(
-                                      color: Colors.white
-                                    ),),
-                                  ),
-                      );
+                                  )
+                                : const Icon(Icons.image, size: 50),
+                          ),
+                          title: Text(
+                            product["Name"],
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          subtitle: Text("Price: ${product["Price"]}"),
+                          trailing: ElevatedButton(
+                            onPressed: () async {
+                              final cart = CartService.fromAuth();
+                              await cart.addToCart({
+                                "ProductId": product.id,
+                                "Name": product['Name'],
+                                "Price": product['Price'],
+                                "Imageurl": product['Imageurl'],
+                              });
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('${product['Name']} added to cart'),
+                                ),
+                              );
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.blue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                            ),
+                            child: const Text(
+                              "Add to Cart",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
                     },
                   );
                 },

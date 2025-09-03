@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:medi_mart/pages/cart/cart_model.dart';
 
@@ -39,10 +38,8 @@ class CategoryList extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  // Horizontal product list
                   SizedBox(
-                    height: 180, // Fixed height is important
+                    height: 180,
                     child: StreamBuilder<QuerySnapshot>(
                       stream: FirebaseFirestore.instance
                           .collection("Products")
