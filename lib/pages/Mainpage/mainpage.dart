@@ -1,8 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:medi_mart/pages/Search/search.dart';
-import 'package:medi_mart/pages/cart/cart_display.dart';
+import 'package:medi_mart/pages/User/user.dart';
 import 'package:medi_mart/pages/Mainpage/list.dart';
 import 'package:medi_mart/pages/Drawer/mydrawer.dart';
 
@@ -16,6 +15,11 @@ class mainpage extends StatefulWidget{
 
 class _mainpageState extends State<mainpage> {
   final user= FirebaseAuth.instance.currentUser!;
+  final Users users=Users.fromAuth();
+
+
+ 
+  
 
   @override
   Widget build(BuildContext context){
@@ -51,6 +55,7 @@ class _mainpageState extends State<mainpage> {
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
 
             children: [
+
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: SizedBox(
@@ -86,19 +91,32 @@ class _mainpageState extends State<mainpage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                      
-                        Text("Hey",
+                        StreamBuilder(
+                        stream: Users.fromAuth().getUserInfo(),
+                        builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                            return CircularProgressIndicator();
+                          }
+                              // snapshot.data is a DocumentSnapshot
+                          var userData = snapshot.data!.data() as Map<String, dynamic>;
+                          if(userData.isEmpty){
+                            return Text("No Name",);
+                            }                    
+                          return Text("Hello, ${userData['FullName']}",
+                          style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white
+                          ), 
+                          );
+                        },
+                          ),
+                      Text("Let's get your medicine",
                         style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                           color: Colors.white
                         ),),
-                        Text("Welcome, ${user.email!}",
-                        style: TextStyle(
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white
-                        ),)
                         
                       ],
                     ),

@@ -59,6 +59,13 @@ class _SearchPageState extends State<SearchPage> {
                   }
         
                   final data = snapshot.data!.docs;
+                  if (query.isEmpty) {
+                    return const Center(child: Text("Please enter a search term",
+                    style: TextStyle(fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black54),
+                    ));
+                  }
                   final results = data.where((doc) {
                     final name = doc["Name"].toString().toLowerCase();
                     return name.contains(query);
@@ -82,7 +89,7 @@ class _SearchPageState extends State<SearchPage> {
                         margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 2),
                         color: Colors.white,
                         child: ListTile(
-                          leading: Container(
+                          leading: SizedBox(
                             width: 50,
                             height: 50,
                             child: (product['Imageurl'] != null)

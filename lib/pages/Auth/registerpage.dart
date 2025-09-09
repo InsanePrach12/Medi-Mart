@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:medi_mart/pages/User/user.dart';
 import 'package:medi_mart/pages/Utilities/my_button.dart';
 import 'package:medi_mart/pages/Utilities/mytextfield.dart';
 import 'package:medi_mart/pages/Utilities/square_tile.dart';
@@ -16,6 +17,9 @@ class _RegisterpageState extends State<Registerpage> {
   final emailController=TextEditingController();
   final passwordController=TextEditingController();
   final confirmPasswordController=TextEditingController();
+  final fullnameController=TextEditingController();
+  final phoneController=TextEditingController();
+  final addressController=TextEditingController();
   void showerrorMessage(String message){
     showDialog(context: context, 
     builder:(context){
@@ -42,9 +46,16 @@ class _RegisterpageState extends State<Registerpage> {
     );
     try {
       if(passwordController.text==confirmPasswordController.text){
-      await FirebaseAuth.instance.createUserWithEmailAndPassword(
-    email: emailController.text, 
-    password: passwordController.text);
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: emailController.text, 
+          password: passwordController.text
+        );
+        Users user = Users.fromAuth();
+        user.adduser({
+          "FullName": fullnameController.text,
+          "Phone": phoneController.text,
+          "Address": addressController.text,
+        });
         Navigator.pop(context);
       }
       else{
@@ -60,8 +71,6 @@ class _RegisterpageState extends State<Registerpage> {
       showerrorMessage(e.code);
       
     }
-    
-    
   } 
 
 
@@ -87,6 +96,24 @@ class _RegisterpageState extends State<Registerpage> {
                   fontWeight: FontWeight.bold,
                   color: Colors.black,
                 ),
+                ),
+                SizedBox(height: 20,),
+                mytextfield(
+                  controller: fullnameController,
+                  hintText: "Full Name",
+                  obscuretext: false,
+                ),
+                SizedBox(height: 20,),
+                mytextfield(
+                  controller: phoneController,
+                  hintText: "Phone Number",
+                  obscuretext: false,
+                ),
+                SizedBox(height: 20,),
+                mytextfield(
+                  controller: addressController,
+                  hintText: "Address",
+                  obscuretext: false,
                 ),
                 SizedBox(height: 20,),
                 mytextfield(

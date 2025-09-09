@@ -97,7 +97,7 @@ class CartPage extends StatelessWidget {
                       color: Colors.grey[200],
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Image .network(
+                    child: Image.network(
                       item["Imageurl"] ?? '',
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
@@ -114,7 +114,7 @@ class CartPage extends StatelessWidget {
                     style: const TextStyle(color: Colors.green),
                   ),
                   trailing: SizedBox(
-                    width: 130,
+                    width: 153,
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [

@@ -97,7 +97,7 @@ class CategoryList extends StatelessWidget {
                                     textAlign: TextAlign.center,
                                   ),
                                   Text(
-                                    "Tk${product['Price']}",
+                                    "৳${product['Price']}",
                                     style:
                                         const TextStyle(color: Colors.green),
                                   ),

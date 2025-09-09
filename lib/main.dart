@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:medi_mart/pages/Auth/auth_page.dart';
 import 'package:medi_mart/pages/Search/search.dart';
+import 'package:medi_mart/pages/User/profile.dart';
 import 'package:medi_mart/pages/cart/cart_display.dart';
 import 'package:medi_mart/pages/Mainpage/mainpage.dart';
 import 'Services/firebase_options.dart';
@@ -23,6 +24,8 @@ class MyApp extends StatelessWidget{
         "/cart":(context) => const CartPage(),
         "/Homepage":(context) =>  mainpage(),
         "/Search":(context) => const SearchPage(),
+        "/Profile":(context) => const Profile(),
+        "/Auth":(context) => const AuthPage(),
       },
     );
   }

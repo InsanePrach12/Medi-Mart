@@ -40,7 +40,10 @@ class Mydrawer extends StatelessWidget{
                   Navigator.pushNamed(context, "/cart");
                 }),
                 SizedBox(height: 10,),
-                MyListTile(text: "Profile", icon:Icons.person, onTap:(){}),
+                MyListTile(text: "Profile", icon:Icons.person, onTap:(){
+                  Navigator.pop(context);
+                  Navigator.pushNamed(context, "/Profile");
+                }),
               ],
             ),
             Padding(
