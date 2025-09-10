@@ -26,7 +26,7 @@ class _mainpageState extends State<mainpage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.white24,
+        backgroundColor: Colors.white,
         title: Text("Medi-Mart",
         style: TextStyle(
           fontSize:30,
@@ -97,12 +97,10 @@ class _mainpageState extends State<mainpage> {
                         if (!snapshot.hasData) {
                             return CircularProgressIndicator();
                           }
-                              // snapshot.data is a DocumentSnapshot
+                        // snapshot.data is a DocumentSnapshot
                           var userData = snapshot.data!.data() as Map<String, dynamic>;
-                          if(userData.isEmpty){
-                            return Text("No Name",);
-                            }                    
-                          return Text("Hello, ${userData['FullName']}",
+                 
+                          return Text("Hello, ${userData['FullName']?? 'User'}",
                           style: TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.bold,

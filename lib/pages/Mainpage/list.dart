@@ -39,7 +39,7 @@ class CategoryList extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 180,
+                    height: 200,
                     child: StreamBuilder<QuerySnapshot>(
                       stream: FirebaseFirestore.instance
                           .collection("Products")
@@ -83,7 +83,7 @@ class CategoryList extends StatelessWidget {
                                 // Product image
                                 if (product['Imageurl'] != null) Image.network(
                                         product['Imageurl'].trim(),
-                                        height: 80,
+                                        height: MediaQuery.of(context).size.height * 0.1,
                                         fit: BoxFit.cover,
                                           errorBuilder: (context, error, stackTrace) {
                                           print('Error loading image: $error');
