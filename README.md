@@ -1,4 +1,5 @@
 # medi_mart
+Added splash screen and product details page as extra features
 
 A new Flutter project.
 
