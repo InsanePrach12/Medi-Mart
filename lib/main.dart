@@ -5,6 +5,7 @@ import 'package:medi_mart/pages/Search/search.dart';
 import 'package:medi_mart/pages/User/profile.dart';
 import 'package:medi_mart/pages/cart/cart_display.dart';
 import 'package:medi_mart/pages/Mainpage/mainpage.dart';
+import 'package:medi_mart/pages/splash/splash.dart';
 import 'Services/firebase_options.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,8 +20,9 @@ class MyApp extends StatelessWidget{
   Widget build(BuildContext context){
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AuthPage(),
+      initialRoute: '/splash',
       routes: {
+        '/splash': (context) => const SplashScreen(),
         "/cart":(context) => const CartPage(),
         "/Homepage":(context) =>  mainpage(),
         "/Search":(context) => const SearchPage(),

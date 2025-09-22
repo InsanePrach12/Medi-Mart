@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:medi_mart/pages/Product%20details/productdet.dart';
 import 'package:medi_mart/pages/cart/cart_model.dart';
 
 class CategoryList extends StatelessWidget {
@@ -63,71 +64,95 @@ class CategoryList extends StatelessWidget {
                           itemBuilder: (context, i) {
                             var product = products[i];
 
-                            return Container(
-                              width: 150,
-                              margin: const EdgeInsets.all(8.0),
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(12),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.3),
-                                    blurRadius: 5,
-                                    spreadRadius: 2,
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProductDetailsPage(
+                                      product: product.data() as Map<String, dynamic>,
+                                      productId: product.id,
+                                    ),
                                   ),
-                                ],
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                // Product image
-                                if (product['Imageurl'] != null) Image.network(
+                                );
+                              },
+                              child: Container(
+                                width: 150,
+                                margin: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.3),
+                                      blurRadius: 5,
+                                      spreadRadius: 2,
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    // Product image
+                                    if (product['Imageurl'] != null)
+                                      Image.network(
                                         product['Imageurl'].trim(),
-                                        height: MediaQuery.of(context).size.height * 0.1,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.1,
                                         fit: BoxFit.cover,
-                                          errorBuilder: (context, error, stackTrace) {
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
                                           print('Error loading image: $error');
-                                          return const Icon(Icons.broken_image, size: 80);
-                                          },
-                                      ) else const Icon(Icons.image, size: 80),
-                                  Text(
-                                    product['Name'],
-                                    style: const TextStyle(
-                                        fontWeight: FontWeight.bold),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                  Text(
-                                    "৳${product['Price']}",
-                                    style:
-                                        const TextStyle(color: Colors.green),
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () async {
-                                      final cart=CartService.fromAuth();
-                                      await cart.addToCart({
-                                        "ProductId": product.id,
-                                        "Name": product['Name'],
-                                        "Price": product['Price'],
-                                        "Imageurl": product['Imageurl'],
-                                      });
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text('${product['Name']} added to cart'),
+                                          return const Icon(Icons.broken_image,
+                                              size: 80);
+                                        },
+                                      )
+                                    else
+                                      const Icon(Icons.image, size: 80),
+                                    Text(
+                                      product['Name'],
+                                      style: const TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    Text(
+                                      "৳${product['Price']}",
+                                      style: const TextStyle(
+                                          color: Colors.green),
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () async {
+                                        final cart = CartService.fromAuth();
+                                        await cart.addToCart({
+                                          "ProductId": product.id,
+                                          "Name": product['Name'],
+                                          "Price": product['Price'],
+                                          "Imageurl": product['Imageurl'],
+                                        });
+                                        ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(
+                                            content: Text(
+                                                '${product['Name']} added to cart'),
+                                                backgroundColor: Colors.green,
+                                          ),
+                                           
+                                        );
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Colors.blue,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
-                                      );
-                                    },
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.blue,
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8),
+                                      ),
+                                      child: const Text(
+                                        "Add to Cart",
+                                        style: TextStyle(color: Colors.white),
                                       ),
                                     ),
-                                    child: const Text("Add to Cart",
-                                    style: TextStyle(
-                                      color: Colors.white
-                                    ),),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             );
                           },

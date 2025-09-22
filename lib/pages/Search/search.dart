@@ -122,6 +122,7 @@ class _SearchPageState extends State<SearchPage> {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text('${product['Name']} added to cart'),
+                                  backgroundColor: Colors.green,
                                 ),
                               );
                             },
