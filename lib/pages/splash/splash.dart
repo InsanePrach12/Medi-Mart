@@ -50,7 +50,6 @@ class _SplashScreenState extends State<SplashScreen>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Logo
               Container(
                 width: 150,
                 height: 150,
@@ -66,7 +65,7 @@ class _SplashScreenState extends State<SplashScreen>
               ),
               const SizedBox(height: 24),
 
-              // App Name
+  
               const Text(
                 'MediMart',
                 style: TextStyle(
@@ -78,7 +77,6 @@ class _SplashScreenState extends State<SplashScreen>
               ),
               const SizedBox(height: 16),
 
-              // Tagline
               Text(
                 'Your Health, Our Priority',
                 style: TextStyle(
@@ -89,8 +87,6 @@ class _SplashScreenState extends State<SplashScreen>
               ),
 
               const SizedBox(height: 48),
-
-              // Loading indicator
               SizedBox(
                 width: 40,
                 height: 40,
